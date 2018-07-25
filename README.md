@@ -1,6 +1,6 @@
 # rss2json python script
 
-this `rss2json` script will convert any rss feed link into wel formated json data, and its supports RSS, ATOM, Google alerts rss feeds, .rss files.
+this `rss2json` script will convert any rss feed link into proper formated json data, and its supports RSS, ATOM, Google alerts rss feeds, .rss files.
 
 
 **Requirements**:
