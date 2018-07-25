@@ -3,7 +3,7 @@
 this `rss2json` script will convert any rss feed link into wel formated json data, and its supports RSS, ATOM, Google alerts rss feeds, .rss files.
 
 
-Requirements:
+**Requirements**:
 -------------
 **Install the library**:
 
@@ -12,11 +12,11 @@ Requirements:
 Run function
 ``rss2json('your rss link')``
 
-**sample Output**::
+**sample Output**:
 ----------
 
 
-{
+``{
   "feeds":[
       {
       "title":"Change Taiwan On Your Websites, Or Pay The Price: China To US Airlines",
@@ -32,6 +32,8 @@ Run function
     "version":"rss20",
     "title":"NDTV News - Top-stories"
     }
-}
+}``
+
+
 
 
