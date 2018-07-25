@@ -1,7 +1,11 @@
+
+# coding: utf-8
+
+# In[50]:
+
+
 import feedparser
 import json
-import datetime
-import time
 
 def rss2json(url):
     
@@ -9,35 +13,54 @@ def rss2json(url):
     rss atom to parsed json data
     supports google alerts
     """
-    parsedurl = feedparser.parse(url)
+   
     item = {}
     feedslist = []
     feed = {}
     feedsdict = {}
+    #parsed feed url
+    parsedurl = feedparser.parse(url)
     
+    #feed meta data    
     feed["status"] = "ok"
+    feed["version"] = parsedurl.version
     if 'updated' in parsedurl.feed.keys():
         feed["date"] = parsedurl.feed.updated 
     if 'title' in  parsedurl.feed.keys():    
         feed["title"]=parsedurl.feed.title
     if 'image' in parsedurl.feed.keys():    
         feed["image"] =parsedurl.feed.image
-    
-#     feeds.append(feed.copy())
     feedsdict["data"] = feed
+
+   
+    #feed parsing
     for fd in parsedurl.entries:
-        item["title"]=fd.title
-        item["link"] = fd.link
-        item["summary"]=fd.summary
-        item["published"]=time.mktime(datetime.datetime.strptime(fd.published, "%a, %d %b %Y %H:%M:%S %z").timetuple())
-        
-        if 'links' in fd and 'image' in fd.links:
-            item["thumbnail"]=feed.links[1]
+        if 'title' in fd.keys():
+            item["title"]=fd.title
+            
+        if 'link' in fd.keys():    
+            item["link"] = fd.link
+            
+        if 'summary' in fd.keys():
+            item["summary"]=fd.summary
+            
+        if 'published' in fd.keys():  
+            item["published"]=fd.published
+            
         if 'storyimage' in fd.keys():
-            item["thumbnail"] = fd["storyimage"]
+            item["thumbnail"] = fd.storyimage
+        
+        if 'media_content' in fd.keys():
+            item["thumbnail"] =fd.media_content
+        
+        if 'tags' in fd.keys():
+            if 'term' in fd.tags:
+                item["keywords"] = fd.tags[0]["term"]
+        
         
         feedslist.append(item.copy())
         
     feedsdict["feeds"] = feedslist
         
     return json.dumps(feedsdict) 
+
