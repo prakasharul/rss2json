@@ -1,9 +1,3 @@
-
-# coding: utf-8
-
-# In[50]:
-
-
 import feedparser
 import json
 
